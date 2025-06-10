@@ -10,7 +10,7 @@ const client = generateClient<Schema>();
 
 function App() {
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
-    const { user, signOut } = useAuthenticator();
+  const { user, signOut } = useAuthenticator();
 
   function deleteTodo(id: string) {
     client.models.Todo.delete({ id })
@@ -30,18 +30,11 @@ function App() {
     <main>
       <h1>{user?.signInDetails?.loginId}'s todos</h1>
       <button onClick={createTodo}>+ new</button>
-      <Stack spacing={2}>
+      <Stack spacing={1}>
         {todos.map((todo) => (
           <Item key={todo.id} onClick={() => deleteTodo(todo.id)}>{todo.content}</Item>
         ))}
       </Stack>
-      <div>
-        🥳 App successfully hosted. Try creating a new todo.
-        <br />
-        <a href="https://docs.amplify.aws/react/start/quickstart/#make-frontend-updates">
-          Review next step of this tutorial.
-        </a>
-      </div>
       <Button onClick={signOut}>Sign out</Button>
     </main>
   );
