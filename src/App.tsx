@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import { useAuthenticator } from '@aws-amplify/ui-react';
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
+import Button from "@mui/material/Button"
+import Stack from '@mui/material/Stack';
+import Item from "./Item";
 
 const client = generateClient<Schema>();
 
@@ -27,11 +30,11 @@ function App() {
     <main>
       <h1>{user?.signInDetails?.loginId}'s todos</h1>
       <button onClick={createTodo}>+ new</button>
-      <ul>
+      <Stack spacing={2}>
         {todos.map((todo) => (
-          <li key={todo.id} onClick={() => deleteTodo(todo.id)}>{todo.content}</li>
+          <Item key={todo.id} onClick={() => deleteTodo(todo.id)}>{todo.content}</Item>
         ))}
-      </ul>
+      </Stack>
       <div>
         🥳 App successfully hosted. Try creating a new todo.
         <br />
@@ -39,7 +42,7 @@ function App() {
           Review next step of this tutorial.
         </a>
       </div>
-      <button onClick={signOut}>Sign out</button>
+      <Button onClick={signOut}>Sign out</Button>
     </main>
   );
 }
